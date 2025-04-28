@@ -26,12 +26,11 @@ public class CustomizedUserRepositoryImpl implements CustomizedUserRepository {
 
     @Override
     public boolean checkUserAvailability(String username) {
+        TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u WHERE u.userName = :username", User.class);
+        query.setParameter("username", username);
+
         try {
-            TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u WHERE u.userName = :username", User.class);
-            query.setParameter("username", username);
-
-            System.out.println(query.getSingleResult());
-
+            User user = query.getSingleResult();
             return false;
         } catch (NoResultException e) {
             return true;

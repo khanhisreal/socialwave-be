@@ -3,29 +3,21 @@ package personal_project.socialwave_be.rest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import personal_project.socialwave_be.dto.User.UserDTO;
 import personal_project.socialwave_be.dto.User.UserMapper;
 import personal_project.socialwave_be.dto.User.UserRegistrationDTO;
 import personal_project.socialwave_be.service.UserService;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
 public class UserController {
-
-    private final UserMapper userMapper;
-    private final ObjectMapper objectMapper;
-    private final UserService userService;
+    private UserMapper userMapper;
+    private ObjectMapper objectMapper;
+    private UserService userService;
 
     @Autowired
     public UserController(UserService theUserService, ObjectMapper theObjectMapper, UserMapper theUserMapper) {
@@ -44,68 +36,18 @@ public class UserController {
         return userService.findById(userId);
     }
 
-    @GetMapping("/users/track")
-    public boolean userNameIsAvailable(@RequestParam String username) {
-        return userService.checkUserAvailability(username);
+    @GetMapping("/users/fetch/{username}")
+    public UserDTO fetchUserByUsername(@PathVariable String username) {
+        return userService.findByUsername(username);
     }
 
     //@RequestBody expects a data sent as a raw JSON payload
-    //best for data in the object of key-value format
+    //use this if the form is of type: application/json
     @PostMapping("/users")
     public UserDTO addUser(@RequestBody UserRegistrationDTO userRegistrationDTO) {
         //prevent updating user when accidentally passing id
         userRegistrationDTO.setUserId(0);
         return userService.save(userRegistrationDTO);
-    }
-
-    //@RequestParam expects data sent as a multipart/form-data
-    //best for data from the formData object that contains file
-    @PostMapping("/users/signup")
-    public ResponseEntity<UserRegistrationDTO> registerUser(
-            @RequestParam("name") String name,
-            @RequestParam("username") String username,
-            @RequestParam("password") String password,
-            @RequestParam("email") String email,
-            @RequestParam(value = "bio", required = false) String bio,
-            @RequestParam(value = "avatar", required = false) MultipartFile avatar) throws IOException {
-
-        String avatarSource = null;
-
-        //create a folder if not exists
-        Path uploadDirPath = Paths.get("C:/socialwave/uploads/");
-        if (!Files.exists(uploadDirPath)) {
-            Files.createDirectories(uploadDirPath);
-        }
-
-        //create a new file
-        if (avatar != null && !avatar.isEmpty()) {
-            try {
-                String fileName = System.currentTimeMillis() + "_" + avatar.getOriginalFilename();
-                Path filePath = uploadDirPath.resolve(fileName);
-                Files.copy(avatar.getInputStream(), filePath);
-                avatarSource = "/uploads/" + fileName;
-            } catch (IOException e) {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-            }
-        }
-
-        //create DTO object - 0: create new
-        UserRegistrationDTO userRegistrationDTO = new UserRegistrationDTO(0, name, username, password, email, avatarSource, bio);
-        userService.save(userRegistrationDTO);
-        return ResponseEntity.ok(userRegistrationDTO);
-    }
-
-    // ? - the wildcard type: unspecified type
-    // T - the generic type: specified type, for eg: UserDTO
-    @PostMapping("/users/login")
-    public ResponseEntity<?> loginUser(@RequestParam("username") String username,
-                                       @RequestParam("password") String password) {
-
-        UserDTO userDTO = userService.findByUsernameAndPassword(username, password);
-
-        if (userDTO != null) return ResponseEntity.ok(userDTO);
-        else return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body("Incorrect username or password.");
     }
 
     @PutMapping("/users")
