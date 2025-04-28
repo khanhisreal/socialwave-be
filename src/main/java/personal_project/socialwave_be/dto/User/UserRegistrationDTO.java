@@ -5,9 +5,6 @@ import personal_project.socialwave_be.dto.Post.PostDTO;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * UserRegistrationDTO: receive a body request that defines a full entity
- */
 public class UserRegistrationDTO {
     private int userId;
     private String name;
