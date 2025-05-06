@@ -1,9 +1,8 @@
-package personal_project.socialwave_be.service;
+package personal_project.socialwave_be.service.User;
 
-import org.springframework.http.ResponseEntity;
-import personal_project.socialwave_be.dto.Post.PostDTO;
 import personal_project.socialwave_be.dto.User.UserDTO;
 import personal_project.socialwave_be.dto.User.UserRegistrationDTO;
+import personal_project.socialwave_be.entity.User;
 
 import java.util.List;
 
@@ -14,6 +13,8 @@ public interface UserService {
     UserDTO save(UserRegistrationDTO theUser);
 
     UserDTO findById(Integer theId);
+
+    User findEntityById(Integer theId);
 
     void deleteById(Integer theId);
 

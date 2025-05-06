@@ -23,11 +23,11 @@ import java.util.List;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private JwtAuthEntryPoint authEntryPoint;
+    private JWTAuthEntryPoint authEntryPoint;
     private CustomUserDetailsService customUserDetailsService;
 
     @Autowired
-    public SecurityConfig(CustomUserDetailsService customUserDetailsService, JwtAuthEntryPoint authEntryPoint) {
+    public SecurityConfig(CustomUserDetailsService customUserDetailsService, JWTAuthEntryPoint authEntryPoint) {
         this.customUserDetailsService = customUserDetailsService;
         this.authEntryPoint = authEntryPoint;
     }

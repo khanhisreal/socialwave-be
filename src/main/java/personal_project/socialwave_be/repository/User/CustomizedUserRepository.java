@@ -1,6 +1,5 @@
-package personal_project.socialwave_be.repository;
+package personal_project.socialwave_be.repository.User;
 
-import personal_project.socialwave_be.dto.User.UserDTO;
 import personal_project.socialwave_be.entity.User;
 
 public interface CustomizedUserRepository {

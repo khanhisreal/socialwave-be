@@ -3,11 +3,12 @@ package personal_project.socialwave_be.rest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import personal_project.socialwave_be.dto.User.UserDTO;
 import personal_project.socialwave_be.dto.User.UserMapper;
 import personal_project.socialwave_be.dto.User.UserRegistrationDTO;
-import personal_project.socialwave_be.service.UserService;
+import personal_project.socialwave_be.service.User.UserService;
 
 import java.util.List;
 import java.util.Map;
