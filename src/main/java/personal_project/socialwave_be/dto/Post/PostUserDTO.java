@@ -1,18 +1,23 @@
 package personal_project.socialwave_be.dto.Post;
 
-public class PostDTO {
+import personal_project.socialwave_be.dto.User.UserPostDTO;
+
+public class PostUserDTO {
     private int postId;
     private String imageSource;
     private String caption;
     private int likeCount;
-    private int userId;
+    private UserPostDTO userPostDTO;
 
-    public PostDTO(int postId, String imageSource, String caption, int likeCount, int userId) {
+    public PostUserDTO() {
+    }
+
+    public PostUserDTO(int postId, String imageSource, String caption, int likeCount, UserPostDTO userPostDTO) {
         this.postId = postId;
         this.imageSource = imageSource;
         this.caption = caption;
         this.likeCount = likeCount;
-        this.userId = userId;
+        this.userPostDTO = userPostDTO;
     }
 
     public int getPostId() {
@@ -47,11 +52,11 @@ public class PostDTO {
         this.likeCount = likeCount;
     }
 
-    public int getUserId() {
-        return userId;
+    public UserPostDTO getUserPostDTO() {
+        return userPostDTO;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserPostDTO(UserPostDTO userPostDTO) {
+        this.userPostDTO = userPostDTO;
     }
 }

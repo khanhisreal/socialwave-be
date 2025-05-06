@@ -1,4 +1,4 @@
-package personal_project.socialwave_be.service;
+package personal_project.socialwave_be.service.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,7 +6,7 @@ import personal_project.socialwave_be.dto.User.UserDTO;
 import personal_project.socialwave_be.dto.User.UserMapper;
 import personal_project.socialwave_be.dto.User.UserRegistrationDTO;
 import personal_project.socialwave_be.entity.User;
-import personal_project.socialwave_be.repository.UserRepository;
+import personal_project.socialwave_be.repository.User.UserRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
-
     private UserRepository userRepository;
     private UserMapper userMapper;
 
@@ -42,6 +41,15 @@ public class UserServiceImpl implements UserService {
         }
 
         return userMapper.toDTO(result.get());
+    }
+
+    @Override
+    public User findEntityById(Integer theId) {
+        Optional<User> result = userRepository.findById(theId);
+        if(!result.isPresent()) {
+            throw new RuntimeException("User not found id - " + theId);
+        }
+        return result.get();
     }
 
     @Override

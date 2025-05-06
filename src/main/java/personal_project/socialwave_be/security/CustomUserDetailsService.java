@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import personal_project.socialwave_be.entity.User;
-import personal_project.socialwave_be.repository.UserRepository;
+import personal_project.socialwave_be.repository.User.UserRepository;
 
 import java.util.Collections;
 

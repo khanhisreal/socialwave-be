@@ -17,7 +17,7 @@ import personal_project.socialwave_be.dto.Auth.AuthResponseDTO;
 import personal_project.socialwave_be.dto.User.UserRegistrationDTO;
 import personal_project.socialwave_be.dto.Auth.UserRegistrationForm;
 import personal_project.socialwave_be.security.JWTGenerator;
-import personal_project.socialwave_be.service.UserService;
+import personal_project.socialwave_be.service.User.UserService;
 
 import java.io.IOException;
 import java.nio.file.Files;

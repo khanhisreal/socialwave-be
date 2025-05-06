@@ -1,4 +1,4 @@
-package personal_project.socialwave_be.repository;
+package personal_project.socialwave_be.repository.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

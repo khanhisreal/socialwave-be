@@ -1,10 +1,9 @@
-package personal_project.socialwave_be.repository;
+package personal_project.socialwave_be.repository.User;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
-import personal_project.socialwave_be.dto.User.UserDTO;
 import personal_project.socialwave_be.entity.User;
 
 public class CustomizedUserRepositoryImpl implements CustomizedUserRepository {

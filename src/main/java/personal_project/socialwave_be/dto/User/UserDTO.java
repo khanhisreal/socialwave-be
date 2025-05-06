@@ -16,7 +16,9 @@ public class UserDTO {
     private String bio;
     private int followerCount;
     private int followingCount;
-    private List<PostDTO> posts;
+
+    public UserDTO() {
+    }
 
     public UserDTO(int userId, String name, String userName, String avatarSource, String bio, int followerCount, int followingCount, List<PostDTO> posts) {
         this.userId = userId;
@@ -26,7 +28,7 @@ public class UserDTO {
         this.bio = bio;
         this.followerCount = followerCount;
         this.followingCount = followingCount;
-        this.posts = posts;
+
     }
 
     public int getUserId() {
@@ -85,12 +87,6 @@ public class UserDTO {
         this.followingCount = followingCount;
     }
 
-    public List<PostDTO> getPosts() {
-        return posts;
-    }
 
-    public void setPosts(List<PostDTO> posts) {
-        this.posts = posts;
-    }
 
 }
